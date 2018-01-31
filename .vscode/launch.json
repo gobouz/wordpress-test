@@ -1,0 +1,18 @@
+{
+    // Utilisez IntelliSense pour en savoir plus sur les attributs possibles.
+    // Pointez pour afficher la description des attributs existants.
+    // Pour plus d'informations, visitez : https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        
+        {
+            "name": "XDebug Docker",
+            "type": "php",
+            "request": "launch",
+            "serverSourceRoot": "/var/www/html",
+            "localSourceRoot": "${workspaceRoot}/wordpress",
+            "port": 9000,
+            "runtimeExecutable": "C:/Program Files/php/php.exe"
+        }
+    ]
+}

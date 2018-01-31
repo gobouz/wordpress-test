@@ -1,0 +1,44 @@
+version: '3.1'
+
+services:
+    mysql:
+        container_name: mysql_xtrem
+        image: mysql:5.7
+        volumes:
+            - db_data:/var/lib/mysql
+        restart: always
+        ports:
+            - 3306:3306
+        environment:
+            MYSQL_ROOT_PASSWORD: secret
+            MYSQL_USER: xtrem
+            MYSQL_PASSWORD: secret
+            MYSQL_DATABASE: xtrem
+
+    wordpress:
+        container_name: wordpress_xtrem
+        build: .
+        volumes:
+            - ./wordpress:/var/www/html
+        restart: always
+        ports:
+            - 80:80
+            - 9000:9000
+        environment:
+            WORDPRESS_DB_HOST: mysql
+            WORDPRESS_DB_USER: xtrem
+            WORDPRESS_DB_PASSWORD: secret
+            WORDPRESS_DB_NAME: xtrem
+        links:
+            - mysql
+
+    pma:
+        container_name: pma_xtrem
+        image: phpmyadmin/phpmyadmin:4.7
+        external_links:
+            - mysql:db
+        ports:
+            - 81:80
+
+volumes:
+    db_data:
