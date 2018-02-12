@@ -22,13 +22,15 @@ services:
             - ./wordpress:/var/www/html
         restart: always
         ports:
-            - 80:80
+            - 5000:80
             - 9000:9000
         environment:
             WORDPRESS_DB_HOST: mysql
             WORDPRESS_DB_USER: xtrem
             WORDPRESS_DB_PASSWORD: secret
             WORDPRESS_DB_NAME: xtrem
+            VIRTUAL_HOST: test.jordane.net
+            VIRTUAL_PORT: 5000
         links:
             - mysql
 
@@ -38,7 +40,12 @@ services:
         external_links:
             - mysql:db
         ports:
-            - 81:80
+            - 5001:80
 
 volumes:
     db_data:
+
+networks:
+    default:
+        external:
+            name: nginx-proxy
